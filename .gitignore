@@ -1,0 +1,21 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Uploaded APK files
+uploads/
+
+# Generated reports
+reports/*.html
+reports/*.json
+reports/*.pdf
+
+# Environment files
+.env
+
+# VS Code
+.vscode/ 

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Mobile App Security Analyzer</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        .header {
+            background: #1f2937;
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .header p {
+            color: #cbd5e1;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .upload-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #2563eb;
+            padding: 40px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            margin: 20px;
+        }
+
+        .button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #1d4ed8;
+        }
+
+        .message {
+            margin-top: 25px;
+            padding: 15px;
+            background: #dcfce7;
+            color: #166534;
+            border-radius: 8px;
+        }
+
+        .reports {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .report-button {
+            text-decoration: none;
+            background: #374151;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+        }
+
+        .report-button:hover {
+            background: #111827;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #6b7280;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <h1>🛡 Mobile App Security Analyzer</h1>
+
+        <p>
+            Automated APK Security Analysis Platform
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="upload-card">
+
+            <h2>Upload APK File</h2>
+
+            <p>
+                Select an Android APK file to perform
+                automated security analysis.
+            </p>
+
+
+            <form method="POST"
+                  enctype="multipart/form-data">
+
+                <div class="upload-box">
+
+                    <h3>📁 Choose your APK file</h3>
+
+                    <input type="file"
+                           name="apk_file"
+                           accept=".apk"
+                           required>
+
+                </div>
+
+
+                <br>
+
+                <button class="button"
+                        type="submit">
+
+                    🔍 Analyze APK
+
+                </button>
+
+            </form>
+
+
+            {% if message %}
+
+                <div class="message">
+
+                    {{ message }}
+
+                </div>
+
+            {% endif %}
+
+
+            {% if analyzed %}
+
+                <div class="reports">
+
+                    <a class="report-button"
+                       href="/report/html">
+
+                        📄 View HTML Report
+
+                    </a>
+
+
+                    <a class="report-button"
+                       href="/report/json">
+
+                        📊 Download JSON Report
+
+                    </a>
+
+
+                    <a class="report-button"
+                       href="/report/pdf">
+
+                        📕 Download PDF Report
+
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+
+        Mobile App Security Analyzer |
+        Cybersecurity Internship Project
+
+    </div>
+
+</body>
+
+</html>

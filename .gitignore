@@ -19,3 +19,5 @@ reports/*.pdf
 
 # VS Code
 .vscode/ 
+# Sample APK files
+samples/

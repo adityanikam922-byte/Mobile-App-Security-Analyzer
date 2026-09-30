@@ -1,4 +1,5 @@
 import argparse
+from pathlib import Path
 
 from android.apk_analyzer import APKAnalyzer
 from android.manifest_analyzer import ManifestAnalyzer
@@ -27,6 +28,14 @@ from report_generator import ReportGenerator
 from html_report_generator import HTMLReportGenerator
 from pdf_report_generator import PDFReportGenerator
 from ios.ipa_analyzer import IPAAnalyzer
+
+
+# Project directories
+BASE_DIR = Path(__file__).resolve().parent.parent
+REPORT_DIR = BASE_DIR / "reports"
+
+# Create reports directory automatically if it does not exist
+REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def analyze_apk(file_path):
@@ -114,14 +123,19 @@ def analyze_apk(file_path):
     }
 
     # Generate reports
-    report_path = ReportGenerator(report_data).generate()
+    report_path = ReportGenerator(
+        report_data,
+        str(REPORT_DIR / "security_report.json")
+    ).generate()
 
     html_report_path = HTMLReportGenerator(
-        report_data
+        report_data,
+        str(REPORT_DIR / "security_report.html")
     ).generate()
 
     pdf_report_path = PDFReportGenerator(
-        report_data
+        report_data,
+        str(REPORT_DIR / "security_report.pdf")
     ).generate()
 
     print("\nAPK Analysis Results")
@@ -242,87 +256,3 @@ def analyze_apk(file_path):
     print("\nCleartext Traffic Analysis Results")
     print("-" * 30)
     print(cleartext_result["risk"])
-
-    print("\nCertificate Analysis Results")
-    print("-" * 30)
-
-    if certificate_results:
-        for certificate in certificate_results:
-            print(f"Certificate file: {certificate}")
-    else:
-        print("No signing certificate files found.")
-
-    print("\nAPK Hash Analysis Results")
-    print("-" * 30)
-    print(f"MD5:    {hash_results['md5']}")
-    print(f"SHA1:   {hash_results['sha1']}")
-    print(f"SHA256: {hash_results['sha256']}")
-
-    print("\nOverall Security Risk Score")
-    print("-" * 30)
-    print(f"Risk Score: {risk_results['score']}/100")
-    print(f"Risk Level: {risk_results['level']}")
-
-    print("\nSecurity Recommendations")
-    print("-" * 30)
-
-    for number, recommendation in enumerate(
-        recommendation_results,
-        start=1
-    ):
-        print(f"{number}. {recommendation}")
-
-    print("\nNative Library Analysis Results")
-    print("-" * 30)
-
-    for library in native_libraries:
-        print(library)
-
-    print("\nJSON Report Generated")
-    print("-" * 30)
-    print(f"Report saved to: {report_path}")
-
-    print("\nHTML Report Generated")
-    print("-" * 30)
-    print(f"Report saved to: {html_report_path}")
-
-    print("\nPDF Report Generated")
-    print("-" * 30)
-    print(f"Report saved to: {pdf_report_path}")
-
-
-def analyze_ipa(file_path):
-
-    ipa_results = IPAAnalyzer(file_path).analyze()
-
-    print("\nIPA Analysis Results")
-    print("-" * 30)
-    print(f"Total files: {ipa_results['total_files']}")
-    print(f"Payload files: {len(ipa_results['payload_files'])}")
-
-
-def main():
-
-    parser = argparse.ArgumentParser(
-        description="Mobile App Security Analyzer"
-    )
-
-    parser.add_argument(
-        "file",
-        help="Path to an APK or IPA file"
-    )
-
-    args = parser.parse_args()
-
-    if args.file.lower().endswith(".apk"):
-        analyze_apk(args.file)
-
-    elif args.file.lower().endswith(".ipa"):
-        analyze_ipa(args.file)
-
-    else:
-        print("Unsupported file type. Use APK or IPA.")
-
-
-if __name__ == "__main__":
-    main()

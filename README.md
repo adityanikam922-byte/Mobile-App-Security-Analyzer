@@ -8,8 +8,7 @@ The tool analyzes an APK and identifies potential security vulnerabilities, inse
 
 The project generates security reports in JSON, HTML, and PDF formats and provides a web-based interface for uploading and analyzing APK files.
 
-
-
+---
 
 ## Features
 
@@ -39,102 +38,27 @@ The project generates security reports in JSON, HTML, and PDF formats and provid
 - PDF Report Generation
 - Web-Based APK Upload Interface
 
-
+---
 
 ## Technologies Used
 
 - Python
 - Flask
 - Androguard
+- ReportLab
 - HTML
 - CSS
 - JSON
 
+---
 
-## Installation
+## Requirements
 
-Create and activate a Python virtual environment:
+- Python 3
+- pip
+- Git
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-
-
-## Running the Web Application
-
-Run:
-
-```bash
-python src/web_app.py
-```
-
-Then open your browser and go to:
+The required Python packages are listed in:
 
 ```text
-http://127.0.0.1:5000
-```
-
-Upload an Android APK file and click **Analyze APK**.
-
-
-## Reports
-
-After analyzing an APK, the project generates three types of security reports:
-
-### JSON Report
-
-Contains structured security analysis results.
-
-### HTML Report
-
-Provides a browser-friendly security report.
-
-### PDF Report
-
-Provides a downloadable security assessment report.
-
-
-## Security Analysis Performed
-
-The analyzer checks for potential security issues including:
-
-- Dangerous Android permissions
-- Debuggable applications
-- Application backup configuration
-- Hardcoded passwords and API keys
-- Possible security tokens
-- Insecure HTTP URLs
-- Insecure data storage patterns
-- Exported Android components
-- Exposed content providers
-- Native libraries
-- APK hashes
-- Application certificates
-
-
-## Sample Result
-
-The project was tested using the DIVA Android application.
-
-Example result:
-
-```text
-Security Risk Score: 80/100
-Risk Level: CRITICAL
-```
-
-
-
-
-
-## Disclaimer
-
-This project is intended for educational purposes and authorized security testing only.
-
-Only analyze applications that you own or have permission to test.
-
-## Author
-
-Aditya 
-
-Cybersecurity Project
+requirements.txt
